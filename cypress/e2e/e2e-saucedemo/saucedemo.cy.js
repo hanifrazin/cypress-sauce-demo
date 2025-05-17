@@ -1,6 +1,6 @@
 describe('Saucedemo Web Test', () => {
     it('Login with valid data', () => {
-        cy.visit('https://www.saucedemo.com/')
+        cy.visit('/')
         //Login
         cy.get('#user-name').type('standard_user');
         cy.get('#password').type('secret_sauce');
@@ -11,7 +11,7 @@ describe('Saucedemo Web Test', () => {
 
     it('Add to Cart and Checkout', () => {
         
-        cy.visit('https://www.saucedemo.com/')
+        cy.visit('/')
         //Login
         cy.get('#user-name').type('standard_user');
         cy.get('#password').type('secret_sauce');
