@@ -22,17 +22,20 @@ describe('Saucedemo Web Test', () => {
 
     it('Login with valid data',() => {
         loginPage.loginUser(loginData.validUser)
-        loginPage.verifyLoginSuccess();
+        loginPage.verifyLoginSuccess()
+        cy.screenshot();
     });
 
     it('Login with invalid user',() => {
         loginPage.loginUser(loginData.invalidUser);
         loginPage.verifyLoginFailed(loginData.invalidUser.errorMsg);
+        cy.screenshot();
     });
 
     it('Login with locked out user',() => {
         loginPage.loginUser(loginData.lockedOutUser);
         loginPage.verifyLoginFailed(loginData.lockedOutUser.errorMsg);
+        cy.screenshot();
     })
 
     it('Add to Cart and Checkout', () => {
@@ -40,10 +43,12 @@ describe('Saucedemo Web Test', () => {
 
         // Add to cart 2 products
         inventoryPage.addProductToCart(productData.products);
+        cy.screenshot();
 
         // Verify Products in Cart
         inventoryPage.verifyCartItemCount(2);
         cy.get('[data-test="shopping-cart-link"]').click();
+        cy.screenshot();
         
         //Checkout: Your Information
         cy.url().should('include','cart.html');
@@ -51,11 +56,13 @@ describe('Saucedemo Web Test', () => {
         cy.get('[data-test="firstName"]').type('Alex');
         cy.get('[data-test="lastName"]').type('Jonatan');
         cy.get('[data-test="postalCode"]').type(11233);
+        cy.screenshot();
         cy.get('[data-test="continue"]').click();
 
         //Checkout: Overview
         cy.xpath("(//div[@class='inventory_item_name'])[1]").should('contain','Sauce Labs Backpack');
         cy.xpath("(//div[@class='inventory_item_name'])[2]").should('contain','Sauce Labs Bike Light');
+        cy.screenshot();
         cy.xpath("//button[@id='finish']").click();
 
         //Checkout: Complete
